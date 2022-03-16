@@ -4,53 +4,49 @@ console.log("js-ok")
 // Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
 
 
-// chiedo al giocatore la difficoltà
-
-let userSelection = askUserDifficult()
-
-while (!userSelection || (userSelection !== 'easy' && userSelection !== 'medium' && userSelection !== 'hard')) {
-    userSelection = askUserDifficult()
-}
-
+// dichiaro le costanti
 const grid = document.getElementById('grid');
 
-let columns
+const buttonEasy = document.getElementById('easy');
 
-let rows
+const buttonMedium = document.getElementById('medium');
 
-// Difficoltà
-if (userSelection === 'hard') {                     //difficoltà 3 => tra 1 e 49
-    columns = 7;
-    rows = 7;
-} else if (userSelection === 'medium') {    // difficoltà 2 => tra 1 e 81
-    columns = 9;
-    rows = 9;
-} else if (userSelection === 'easy') {          // difficoltà 1 => tra 1 e 100
-    columns = 10;
-    rows = 10;
-}
+const buttonHard = document.getElementById('hard');
 
-// calcolo il totale delle celle da generare
-const totalCells = columns * rows;
+// html bottoni difficoltà
+buttonEasy.addEventListener('click', () => createElementsInGrid(100, 'easy'));
 
-// ciclo le celle della griglia
-for (let i = 0; i < totalCells; i++) {
+buttonMedium.addEventListener('click', () => createElementsInGrid(81, 'medium'));
 
-    // creo la cella
-    const cell = createCell();
+buttonHard.addEventListener('click', () => createElementsInGrid(49, 'hard'));
 
-    cell.innerText = (i + 1);
 
-    // Click su cella che resta azzurra.
-    cell.addEventListener('click', function (event) {
-        cell.classList.add('bg-blue');
-    })
 
-    // aggiungo la cella nella griglia
-    grid.appendChild(cell);
-}
+
+
 
 //-------------------- Function -------------------//
+
+
+// creo la griglia
+function createElementsInGrid(totalCells, levelClass) {
+
+    const grid = document.getElementById('grid');
+
+    grid.innerHTML = '';
+
+    for (let i = 0; i < totalCells; i++) {
+
+        const cell = document.createElement('div');
+
+        cell.className = 'cell';
+        cell.classList.add(levelClass);
+
+        cell.innerText = (i + 1);
+
+        grid.appendChild(cell);
+    }
+}
 
 // chiedo la difficoltà
 function askUserDifficult() {
