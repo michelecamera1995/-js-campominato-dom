@@ -5,6 +5,8 @@ console.log("js-ok")
 
 
 // dichiaro le costanti
+
+
 const grid = document.getElementById('grid');
 
 const buttonEasy = document.getElementById('easy');
@@ -28,10 +30,9 @@ buttonHard.addEventListener('click', () => createElementsInGrid(49, 'hard'));
 //la cella si colora di rosso e la partita termina
 //altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
 
-const Mines = addMines();
+const number = addMines(16)
 
-console.log(Mines);
-
+console.log(number)
 
 //-------------------- Function -------------------//
 
@@ -41,27 +42,26 @@ function createElementsInGrid(totalCells, levelClass) {
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
     for (let i = 0; i < totalCells; i++) {
-        const cell = document.createElement('div');
+        let cell = document.createElement('div');
         cell.className = 'cell';
         cell.classList.add(levelClass);
         cell.innerText = (i + 1);
         grid.appendChild(cell);
+        cell.id = ('c-' + (i + 1));
     }
-
 }
 
 // creo le 16 mine non duplicate
-function addMines() {
+function addMines(max) {
     const numberMine = [];
-    for (var i = 0; i < 16; i++) {
-        const number = generateRandomNumber(1, 100);
-        if (!numberMine.includes(number)) {
-            numberMine.push(number);
+    while (numberMine < 16) {
+        const numberMine = generateRandomNumber(1, max)
+        if (numberMine.includes(numberMine) === false) {
+            numberMine.push(numberMine);
         }
     }
     return numberMine;
 }
-
 
 // generatore di numeri casuali
 function generateRandomNumber(min, max) {
