@@ -16,11 +16,11 @@ const buttonMedium = document.getElementById('medium');
 const buttonHard = document.getElementById('hard');
 
 // html bottoni difficoltà
-buttonEasy.addEventListener('click', () => createElementsInGrid(100, 'easy'));
+buttonEasy.addEventListener('click', () => start(100, 'easy'));
 
-buttonMedium.addEventListener('click', () => createElementsInGrid(81, 'medium'));
+buttonMedium.addEventListener('click', () => start(81, 'medium'));
 
-buttonHard.addEventListener('click', () => createElementsInGrid(49, 'hard'));
+buttonHard.addEventListener('click', () => start(49, 'hard'));
 
 //Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
 //I numeri nella lista delle bombe non possono essere duplicati.
@@ -30,12 +30,12 @@ buttonHard.addEventListener('click', () => createElementsInGrid(49, 'hard'));
 //la cella si colora di rosso e la partita termina
 //altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
 
-const number = addMines(16)
-
-console.log(number)
+//La partita termina quando il giocatore clicca su una bomba 
+//o raggiunge il numero massimo possibile di numeri consentiti.
+//Al termine della partita il software deve comunicare il punteggio, 
+//cioè il numero di volte che l’utente ha cliccato su una cella che non era una b.
 
 //-------------------- Function -------------------//
-
 
 // creo la griglia
 function createElementsInGrid(totalCells, levelClass) {
@@ -53,14 +53,42 @@ function createElementsInGrid(totalCells, levelClass) {
 
 // creo le 16 mine non duplicate
 function addMines(max) {
-    const numberMine = [];
-    while (numberMine < 16) {
+    const listMine = [];
+    while (listMine.length < 16) {
         const numberMine = generateRandomNumber(1, max)
-        if (numberMine.includes(numberMine) === false) {
-            numberMine.push(numberMine);
+        if (listMine.includes(numberMine) === false) {
+            listMine.push(numberMine);
         }
     }
-    return numberMine;
+    return listMine;
+}
+
+// start
+function start(totCells, level) {
+    const bombPos = addMines(totCells)
+    let count = 0;
+    console.log(bombPos)
+    createElementsInGrid(totCells, level);
+    for (let i = 1; i <= totCells; i++) {
+        const cell = document.getElementById('c-' + i);
+        cell.addEventListener('click', () => {
+            count++;
+            const bombPresence = bombPos.includes(i);
+            if (bombPresence) {
+                cell.classList.toggle('bg-red');
+                grid.classList.add('n-cursor');
+                alert("Hai perso, riavvia!");
+                alert("hai cliccato " + count + " volte senza aver trovato la bomba!")
+            } else {
+                cell.classList.toggle('bg-blue');
+                let clicked = true;
+                console.log(clicked)
+                if (!bombPresence && clicked) {
+                    alert("Hai vinto!")
+                }
+            }
+        });
+    }
 }
 
 // generatore di numeri casuali

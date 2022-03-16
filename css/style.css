@@ -55,6 +55,7 @@ body {
 }
 
 .n-cursor{
-  cursor: none;
+  pointer-events: none;
+  cursor: default;
 }
 
