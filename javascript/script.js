@@ -78,11 +78,10 @@ function start(totCells, level) {
                 cell.classList.toggle('bg-red');
                 grid.classList.add('n-cursor');
                 alert("Hai perso, riavvia!");
-                alert("hai cliccato " + count + " volte senza aver trovato la bomba!")
+                alert("hai cliccato " + count + " volte e hai trovato la bomba!!!")
             } else {
                 cell.classList.toggle('bg-green');
                 let clicked = true;
-                console.log(clicked)
                 if (cell[i] === count) {
                     alert("Hai vinto!")
                 }
