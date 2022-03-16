@@ -83,7 +83,7 @@ function start(totCells, level) {
                 cell.classList.toggle('bg-blue');
                 let clicked = true;
                 console.log(clicked)
-                if (!bombPresence && clicked) {
+                if (cell[i] === count) {
                     alert("Hai vinto!")
                 }
             }
