@@ -6,7 +6,6 @@ console.log("js-ok")
 
 // dichiaro le costanti
 
-
 const grid = document.getElementById('grid');
 
 const buttonEasy = document.getElementById('easy');
@@ -16,11 +15,12 @@ const buttonMedium = document.getElementById('medium');
 const buttonHard = document.getElementById('hard');
 
 // html bottoni difficoltà
-buttonEasy.addEventListener('click', () => start(100, 'easy'));
+
+buttonEasy.addEventListener('click', () => start(49, 'easy'));
 
 buttonMedium.addEventListener('click', () => start(81, 'medium'));
 
-buttonHard.addEventListener('click', () => start(49, 'hard'));
+buttonHard.addEventListener('click', () => start(100, 'hard'));
 
 //Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
 //I numeri nella lista delle bombe non possono essere duplicati.
@@ -80,7 +80,7 @@ function start(totCells, level) {
                 alert("Hai perso, riavvia!");
                 alert("hai cliccato " + count + " volte senza aver trovato la bomba!")
             } else {
-                cell.classList.toggle('bg-blue');
+                cell.classList.toggle('bg-green');
                 let clicked = true;
                 console.log(clicked)
                 if (cell[i] === count) {

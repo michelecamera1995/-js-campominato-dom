@@ -42,12 +42,11 @@ body h2{
 
 .button-19 {
   appearance: button;
-  background-color: #1899D6;
-  border: solid transparent;
+  background-color: rgb(240, 221, 145);
+  border: 2px solid black;
   border-radius: 16px;
-  border-width: 0 0 4px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #000000;
   cursor: pointer;
   display: inline-block;
   font-family: din-round,sans-serif;
@@ -72,7 +71,7 @@ body h2{
 
 .button-19:after {
   background-clip: padding-box;
-  background-color: #1CB0F6;
+  background-color: rgb(240, 221, 145);
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
@@ -106,7 +105,7 @@ body h2{
   border: 1px solid black;
 }
 
-.cell.hard {
+.cell.easy {
   width: calc(100% / 7);
   height: calc(100% / 7);
 }
@@ -116,7 +115,7 @@ body h2{
   height: calc(100% / 9);
 }
 
-.cell.easy {
+.cell.hard{
   width: calc(100% / 10);
   height: calc(100% / 10);
 }
