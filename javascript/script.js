@@ -20,9 +20,17 @@ buttonMedium.addEventListener('click', () => createElementsInGrid(81, 'medium'))
 
 buttonHard.addEventListener('click', () => createElementsInGrid(49, 'hard'));
 
+//Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
+//I numeri nella lista delle bombe non possono essere duplicati.
 
+//In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati 
+//abbiamo calpestato una bomba 
+//la cella si colora di rosso e la partita termina
+//altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
 
+const Mines = addMines();
 
+console.log(Mines);
 
 
 //-------------------- Function -------------------//
@@ -30,31 +38,36 @@ buttonHard.addEventListener('click', () => createElementsInGrid(49, 'hard'));
 
 // creo la griglia
 function createElementsInGrid(totalCells, levelClass) {
-
     const grid = document.getElementById('grid');
-
     grid.innerHTML = '';
-
     for (let i = 0; i < totalCells; i++) {
-
         const cell = document.createElement('div');
-
         cell.className = 'cell';
         cell.classList.add(levelClass);
-
         cell.innerText = (i + 1);
-
         grid.appendChild(cell);
     }
+
 }
 
-// chiedo la difficoltà
-function askUserDifficult() {
-    let userChoice = prompt('Select easy, medium or hard mode.');
-    if (userChoice) {
-        userChoice = userChoice.trim().toLowerCase();
+// creo le 16 mine non duplicate
+function addMines() {
+    const numberMine = [];
+    for (var i = 0; i < 16; i++) {
+        const number = generateRandomNumber(1, 100);
+        if (!numberMine.includes(number)) {
+            numberMine.push(number);
+        }
     }
-    return userChoice
+    return numberMine;
+}
+
+
+// generatore di numeri casuali
+function generateRandomNumber(min, max) {
+    const range = (max - min) + 1;
+    const numeroRandom = Math.floor(Math.random() * range + min);
+    return numeroRandom;
 }
 
 // creo una cella 
