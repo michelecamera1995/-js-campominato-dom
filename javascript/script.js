@@ -41,6 +41,7 @@ buttonHard.addEventListener('click', () => start(100, 'hard'));
 function createElementsInGrid(totalCells, levelClass) {
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
+    grid.classList.remove('n-cursor');
     for (let i = 0; i < totalCells; i++) {
         let cell = document.createElement('div');
         cell.className = 'cell';
@@ -63,32 +64,29 @@ function addMines(max) {
     return listMine;
 }
 
-// start
+// start game
 function start(totCells, level) {
     const bombPos = addMines(totCells)
-    let count = 0;
     console.log(bombPos)
     createElementsInGrid(totCells, level);
+    let points = 0;
     for (let i = 1; i <= totCells; i++) {
         const cell = document.getElementById('c-' + i);
         cell.addEventListener('click', () => {
-            count++;
             const bombPresence = bombPos.includes(i);
             if (bombPresence) {
-                cell.classList.toggle('bg-red');
                 grid.classList.add('n-cursor');
+                cell.classList.add('bomb');
                 alert("Hai perso, riavvia!");
-                alert("hai cliccato " + count + " volte e hai trovato la bomba!!!")
             } else {
                 cell.classList.toggle('bg-green');
-                let clicked = true;
-                if (cell[i] === count) {
-                    alert("Hai vinto!")
-                }
+                points++;
+                console.log(points)
             }
         });
     }
 }
+
 
 // generatore di numeri casuali
 function generateRandomNumber(min, max) {

@@ -28,6 +28,7 @@ body {
   -webkit-backdrop-filter: blur( 20px );
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
+  cursor: pointer;
 }
 
 body h1{
@@ -120,13 +121,10 @@ body h2{
   height: calc(100% / 10);
 }
 
-
-.bg-blue{
-  background-color: rgb(0, 209, 228);
-}
-
-.bg-red{
-  background-color: rgb(228, 0, 0);
+.bomb {
+  background-image: url("../img/bomb.png");
+  background-position: center;
+  background-size: contain;
 }
 
 .bg-green{
@@ -135,6 +133,5 @@ body h2{
 
 .n-cursor{
   pointer-events: none;
-  cursor: default;
 }
 
