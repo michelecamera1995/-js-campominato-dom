@@ -5,7 +5,7 @@ console.log("js-ok")
 
 //numero di bombe generate
 
-const numberOfBombs = 15;
+const numberOfBombs = 1;
 
 // dichiaro le costanti
 
