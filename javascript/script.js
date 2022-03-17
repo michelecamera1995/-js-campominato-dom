@@ -5,7 +5,7 @@ console.log("js-ok")
 
 //numero di bombe generate
 
-const numberOfBombs = 1;
+const numberOfBombs = 15;
 
 // dichiaro le costanti
 
@@ -20,11 +20,11 @@ const buttonHard = document.getElementById('hard');
 
 // html bottoni difficoltà
 
-buttonEasy.addEventListener('click', () => start(49, 'easy'));
+buttonEasy.addEventListener('click', () => start(100, 'easy'));
 
 buttonMedium.addEventListener('click', () => start(81, 'medium'));
 
-buttonHard.addEventListener('click', () => start(100, 'hard'));
+buttonHard.addEventListener('click', () => start(49, 'hard'));
 
 //Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
 //I numeri nella lista delle bombe non possono essere duplicati.
@@ -50,7 +50,7 @@ function createElementsInGrid(totalCells, levelClass) {
         let cell = document.createElement('div');
         cell.className = 'cell';
         cell.classList.add(levelClass);
-        //cell.innerText = (i + 1);
+        cell.innerText = (i + 1);
         grid.appendChild(cell);
     }
 }
@@ -90,11 +90,11 @@ function addClickToCells(bombs) {
                 alert("Hai perso, riavvia!");
             } else {
                 cell.classList.add('metal');
-                console.log(points)
                 points++;
-                const notBombs = allCells.length - bombs.length;
+                const notBombs = allCells.length - numberOfBombs;
+                console.log('punti ' + points);
+                console.log('cell not bomb ' + notBombs);
                 if (points >= notBombs) {
-                    blockCells();
                     alert("Hai vinto!");
                     alert('Hai ottenuto: ' + points + ' punti');
                 }
@@ -129,8 +129,3 @@ function createCell() {
     return item;
 }
 
-// blocco le celle
-function blockCells() {
-    const grid = document.getElementById('grid');
-    grid.classList.add('n-cursor');
-}
