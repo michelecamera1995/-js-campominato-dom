@@ -93,8 +93,8 @@ function addClickToCells(bombs) {
                 points++;
                 const notBombs = allCells.length - bombs.length;
                 if (points >= notBombs) {
-                    alert("Hai vinto!");
                     blockCells();
+                    alert("Hai vinto!");
                     alert('Hai ottenuto: ' + points + ' punti');
                 }
             }
