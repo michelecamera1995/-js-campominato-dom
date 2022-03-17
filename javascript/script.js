@@ -3,6 +3,9 @@ console.log("js-ok")
 // creare una griglia di gioco quadrata, in cui ogni cella contiene un numero tra quelli compresi in un range compreso tra 1 e 100 
 // Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
 
+//numero di bombe generate
+
+const numberOfBombs = 1;
 
 // dichiaro le costanti
 
@@ -13,6 +16,7 @@ const buttonEasy = document.getElementById('easy');
 const buttonMedium = document.getElementById('medium');
 
 const buttonHard = document.getElementById('hard');
+
 
 // html bottoni difficoltà
 
@@ -48,14 +52,13 @@ function createElementsInGrid(totalCells, levelClass) {
         cell.classList.add(levelClass);
         //cell.innerText = (i + 1);
         grid.appendChild(cell);
-        cell.id = ('c-' + (i + 1));
     }
 }
 
 // creo le 16 mine non duplicate
 function addMines(max) {
     const listMine = [];
-    while (listMine.length < 16) {
+    while (listMine.length < numberOfBombs) {
         const numberMine = generateRandomNumber(1, max)
         if (listMine.includes(numberMine) === false) {
             listMine.push(numberMine);
@@ -66,7 +69,7 @@ function addMines(max) {
 
 // start game
 function start(totCells, level) {
-    const bombPos = addMines(totCells)
+    const bombPos = addMines(totCells);
     console.log(bombPos)
     createElementsInGrid(totCells, level);
     addClickToCells(bombPos);
@@ -79,18 +82,36 @@ function addClickToCells(bombs) {
     for (let i = 0; i < allCells.length; i++) {
         const cell = allCells[i];
         cell.addEventListener('click', () => {
-            const bombPresence = bombs.includes(i);
+            const bombPresence = bombs.includes(i + 1);
             if (bombPresence) {
                 grid.classList.add('n-cursor');
                 cell.classList.add('bomb');
+                showBombs(bombs);
                 alert("Hai perso, riavvia!");
             } else {
                 cell.classList.add('metal');
                 points++;
-                console.log(points)
+                const notBombs = allCells.length - bombs.length;
+                if (points >= notBombs) {
+                    alert("Hai vinto!");
+                    blockCells();
+                    alert('Hai ottenuto: ' + points + ' punti');
+                }
             }
         });
     }
+}
+
+// mostro le bombe
+function showBombs(bombsToShow) {
+    const allCells = document.querySelectorAll('.cell');
+    for (let i = 0; i < allCells.length; i++) {
+        if (bombsToShow.includes(i + 1)) {
+            const bombCell = allCells[i];
+            bombCell.classList.add('bomb');
+        }
+    }
+
 }
 
 // generatore di numeri casuali
@@ -107,4 +128,9 @@ function createCell() {
     return item;
 }
 
+// blocco le celle
+function blockCells() {
+    const grid = document.getElementById('grid');
+    grid.classList.add('n-cursor');
 
+}
