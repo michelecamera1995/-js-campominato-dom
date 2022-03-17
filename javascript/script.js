@@ -5,7 +5,7 @@ console.log("js-ok")
 
 //numero di bombe generate
 
-const numberOfBombs = 15;
+const numberOfBombs = 1;
 
 // dichiaro le costanti
 
@@ -90,6 +90,7 @@ function addClickToCells(bombs) {
                 alert("Hai perso, riavvia!");
             } else {
                 cell.classList.add('metal');
+                console.log(points)
                 points++;
                 const notBombs = allCells.length - bombs.length;
                 if (points >= notBombs) {
@@ -132,5 +133,4 @@ function createCell() {
 function blockCells() {
     const grid = document.getElementById('grid');
     grid.classList.add('n-cursor');
-
 }
