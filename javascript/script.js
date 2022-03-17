@@ -46,7 +46,7 @@ function createElementsInGrid(totalCells, levelClass) {
         let cell = document.createElement('div');
         cell.className = 'cell';
         cell.classList.add(levelClass);
-        cell.innerText = (i + 1);
+        //cell.innerText = (i + 1);
         grid.appendChild(cell);
         cell.id = ('c-' + (i + 1));
     }
@@ -69,24 +69,29 @@ function start(totCells, level) {
     const bombPos = addMines(totCells)
     console.log(bombPos)
     createElementsInGrid(totCells, level);
+    addClickToCells(bombPos);
+}
+
+// evento click e condizioni vittoria / sconfitta
+function addClickToCells(bombs) {
     let points = 0;
-    for (let i = 1; i <= totCells; i++) {
-        const cell = document.getElementById('c-' + i);
+    const allCells = document.getElementsByClassName('cell');
+    for (let i = 0; i < allCells.length; i++) {
+        const cell = allCells[i];
         cell.addEventListener('click', () => {
-            const bombPresence = bombPos.includes(i);
+            const bombPresence = bombs.includes(i);
             if (bombPresence) {
                 grid.classList.add('n-cursor');
                 cell.classList.add('bomb');
                 alert("Hai perso, riavvia!");
             } else {
-                cell.classList.toggle('bg-green');
+                cell.classList.add('metal');
                 points++;
                 console.log(points)
             }
         });
     }
 }
-
 
 // generatore di numeri casuali
 function generateRandomNumber(min, max) {

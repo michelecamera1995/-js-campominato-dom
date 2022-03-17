@@ -104,6 +104,9 @@ body h2{
   background-color: rgb(255, 255, 255);
   text-align: center;
   border: 1px solid black;
+  background-image: url("../img/grass.jpg");
+  background-position: center;
+  background-size: contain;
 }
 
 .cell.easy {
@@ -127,8 +130,10 @@ body h2{
   background-size: contain;
 }
 
-.bg-green{
-  background-color: rgb(21, 255, 0);
+.metal {
+  background-image: url("../img/metal.jpg");
+  background-position: center;
+  background-size: contain;
 }
 
 .n-cursor{
