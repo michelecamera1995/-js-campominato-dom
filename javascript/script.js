@@ -5,7 +5,7 @@ console.log("js-ok")
 
 //numero di bombe generate
 
-const numberOfBombs = 1;
+const numberOfBombs = 15;
 
 // dichiaro le costanti
 
@@ -50,7 +50,7 @@ function createElementsInGrid(totalCells, levelClass) {
         let cell = document.createElement('div');
         cell.className = 'cell';
         cell.classList.add(levelClass);
-        cell.innerText = (i + 1);
+        //cell.innerText = (i + 1);
         grid.appendChild(cell);
     }
 }
@@ -70,9 +70,9 @@ function addMines(max) {
 // start game
 function start(totCells, level) {
     const bombPos = addMines(totCells);
-    console.log(bombPos)
     createElementsInGrid(totCells, level);
     addClickToCells(bombPos);
+    //console.log(bombPos)
 }
 
 // evento click e condizioni vittoria / sconfitta
@@ -92,8 +92,8 @@ function addClickToCells(bombs) {
                 cell.classList.add('metal');
                 points++;
                 const notBombs = allCells.length - numberOfBombs;
-                console.log('punti ' + points);
-                console.log('cell not bomb ' + notBombs);
+                //console.log('punti ' + points);
+                //console.log('cell not bomb ' + notBombs);
                 if (points >= notBombs) {
                     alert("Hai vinto!");
                     alert('Hai ottenuto: ' + points + ' punti');
